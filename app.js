@@ -3,6 +3,14 @@ const app = express();
 const PORT = 4000;
 
 
+app.use(function(req,res,next){
+    const method = req.method;
+    const endPoint = req.url;
+    console.log(`${method} request made to ${endPoint}`);
+    next();
+})
+
+
 app.get("/products",(req,res)=>{
     res.send("<h1>Here is the list of all Products</h1>")
 });
@@ -19,7 +27,7 @@ app.post("/categories",(req,res)=>{
     res.send("<h1>A new Category has been created.</h1>");
 })
 
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.status(404).send('Page Not Found');
 });
 
