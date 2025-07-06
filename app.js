@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 
+const productsRoutes = require('./routes/products');
+const categoriesRoutes = require('./routes/categories');
+
 
 app.use(function(req,res,next){
     const method = req.method;
@@ -11,21 +14,9 @@ app.use(function(req,res,next){
 })
 
 
-app.get("/products",(req,res)=>{
-    res.send("<h1>Here is the list of all Products</h1>")
-});
+app.use("/products",productsRoutes);
+app.use("/categories",categoriesRoutes);
 
-app.post("/products",(req,res)=>{
-    res.send("<h1>A new product has been added</h1>");
-})
-
-app.get("/categories",(req,res)=>{
-    res.send("<h1>Here is the list of all Categories.</h1>")
-});
-
-app.post("/categories",(req,res)=>{
-    res.send("<h1>A new Category has been created.</h1>");
-})
 
 app.get(/.*/, (req, res) => {
   res.status(404).send('Page Not Found');
