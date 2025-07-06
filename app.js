@@ -19,6 +19,10 @@ app.post("/categories",(req,res)=>{
     res.send("<h1>A new Category has been created.</h1>");
 })
 
+app.get('*', (req, res) => {
+  res.status(404).send('Page Not Found');
+});
+
 
 app.listen(PORT,()=>{
     console.log(`Server running on http://localhost:${PORT}`);
